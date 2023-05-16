@@ -11,7 +11,7 @@ import PostDetail from "../../components/PostDetail";
 
 const Home = () => {
     const [query, setQuery] = useState("")
-    const { documents: posts, loading } = useFetchDocuments("posts")
+    const { documents: posts, loading } = useFetchDocuments("posts")  // método para enviar dados para o Firebase
 
     const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const Home = () => {
         e.preventDefault();
 
         if (query) {
-            return navigate(`/search?q=${query}`); //enviando um parametro chamado com Q com o texto da minha query do input 
+            return navigate(`/search?q=${query}`); //enviando um parâmetro chamado com Q com o texto da minha query do input 
         }
     };
     console.log(loading)

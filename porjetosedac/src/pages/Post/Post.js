@@ -1,4 +1,4 @@
-import styles from "./Post.module.css";
+//import styles from "./Post.module.css";
 
 //hooks
 import { useParams } from "react-router-dom";

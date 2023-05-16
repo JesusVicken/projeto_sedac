@@ -27,7 +27,7 @@ const CreatePost = () => {
 
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault(); //não submeter o formulário sem querer
         setFormError("");  //zerar os erros do form
 
         // validar imagem URL
@@ -40,7 +40,7 @@ const CreatePost = () => {
         //Criar o array de tags
         const tagsArray = tags.split(",").map((tag) => tag.trim().toLowerCase());
 
-        //Check todos os valores
+        //Check todos os valores vieram
         if (!title || !image || !tags || !body) {
             setFormError('Por favor, preencha todos os campos!')
         }
@@ -57,7 +57,7 @@ const CreatePost = () => {
             createdBy: user.displayName
         });
 
-        //redirect p/ home page
+        //redirect p/ home page depois de submeter o formulário
         navigate("/");
 
     };

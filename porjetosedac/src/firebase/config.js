@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import {initializeFirestore} from 'firebase/firestore';
+import {getAuth} from 'firebase/auth';
 
 
 const firebaseConfig = {
@@ -8,11 +9,14 @@ const firebaseConfig = {
     projectId: "projetosedac",
     storageBucket: "projetosedac.appspot.com",
     messagingSenderId: "267853272029",
-    appId: "1:267853272029:web:f39bbc11f6e495e5981c34"
+    appId: "1:267853272029:web:f39bbc11f6e495e5981c34",
+    measurementId: '',
 };
 
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = initializeFirestore(app, {
+    experimentalForceLongPolling: true,
+});
 
-const db = getFirestore(app);
-
-export { db };   // exportando o banco de dados
+export { db, auth };   // exportando o BD e a autenticação
