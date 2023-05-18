@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 //hooks
 import { useAuthValue } from "../../context/AuthContext";
 import { useFetchDocuments } from "../../hooks/useFetchDocuments";
+import { useDeleteDocument } from '../../hooks/useDeleteDocument';
 
 const Dashboard = () => {
 
@@ -12,8 +13,7 @@ const Dashboard = () => {
     const uid = user.uid // Assim consigo chamar no fetchDocuments os posts do usuários que ele criou pelo ID
 
     const { documents: posts, loading } = useFetchDocuments("posts", null, uid);
-
-    const deleteDocument = (id) => { };
+    const { deleteDocument } = useDeleteDocument("posts"); 
 
     if(loading) {
         <p>Carregando...</p>

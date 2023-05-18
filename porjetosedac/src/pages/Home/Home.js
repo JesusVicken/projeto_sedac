@@ -31,7 +31,7 @@ const Home = () => {
                 <input type="text" placeholder="Busque por tags..." onChange={(e) => setQuery(e.target.value)} />
                 <button className="btn btn-dark">Pesquisar</button>
             </form>
-            <div>
+            <div className="post-list">
                 {loading && <p>Carregando...</p>}  {/*verificar se essa linha é necessário*/}
                 {posts && posts.map((post) => <PostDetail key={post.id} post={post} />)}   {/* mostrando o post na home */}
                 {posts && posts.length === 0 && (
