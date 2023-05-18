@@ -15,9 +15,9 @@ import { Link } from "react-router-dom";
 
 const Search = () => {
     const query = useQuery()
-    const search = query.get("q"); //método get do próprio URLSearchParams
+    const search = query.get("q"); //método GET do próprio URLSearchParams consegue pegar atributo cadastrado lá (q)
 
-    const { documents: posts } = useFetchDocuments("posts", search);
+    const { documents: posts } = useFetchDocuments("posts", search); //carregando os documentos baseado na busca
 
     return <div className={styles.search_container}>
         <h2>Search</h2>

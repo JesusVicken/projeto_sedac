@@ -11,15 +11,15 @@ import PostDetail from "../../components/PostDetail";
 
 const Home = () => {
     const [query, setQuery] = useState("")
-    const { documents: posts, loading } = useFetchDocuments("posts")  // método para enviar dados para o Firebase
+    const { documents: posts, loading } = useFetchDocuments("posts")  // coleção, método que vamos trabalhar
 
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault(); //não recarregar a pag
 
         if (query) {
-            return navigate(`/search?q=${query}`); //enviando um parâmetro chamado com Q com o texto da minha query do input 
+            return navigate(`/search?q=${query}`); //enviando um parâmetro chamado com Q com o texto da minha query do input para uma nova pagina 'Search' extraindo os dados do hook
         }
     };
     console.log(loading)
@@ -32,8 +32,8 @@ const Home = () => {
                 <button className="btn btn-dark">Pesquisar</button>
             </form>
             <div>
-                {loading && <p>Carregando...</p>}
-                {posts && posts.map((post) => <PostDetail key={post.id} post={post} />)}
+                {loading && <p>Carregando...</p>}  {/*verificar se essa linha é necessário*/}
+                {posts && posts.map((post) => <PostDetail key={post.id} post={post} />)}   {/* mostrando o post na home */}
                 {posts && posts.length === 0 && (
                     <div className={styles.noposts}>
                         <p>Não foram encontrados posts!</p>

@@ -1,19 +1,21 @@
 import { useState, useEffect } from "react";
 import { db } from "../firebase/config";
-import {
-  collection,    //métodos para trazer os dados do projeto
+import {  // métodos para trazer os dados do projeto
+  collection, // definir a coleção
   query,  // pegar o dado
-  orderBy, //ordenar os dados
-  onSnapshot,
-  where, // filtro 
+  orderBy, // ordenar os dados
+  onSnapshot, // trazer os dados novos
+  where, // filtro nos resultados trazidos
 } from "firebase/firestore";
 
-export const useFetchDocuments = (docCollection, search = null, uid = null) => {
+//hook de resgate de dados 
+
+export const useFetchDocuments = (docCollection, search = null, uid = null) => {   // parâmetros opcionais (= nul) ñ precisamos mandar necessariamente
   const [documents, setDocuments] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
 
-  // memory leak vazamento de memória
+  // memory leak, vazamento de memória
   const [cancelled, setCancelled] = useState(false);
 
   useEffect(() => {
@@ -25,11 +27,11 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
       setLoading(true);
 
       const collectionRef = await collection(db, docCollection);
-
+      //tratando erros com try,catch
       try {
         let q;
 
-        //busca
+        //busca, filtro
         if (search) {
           q = await query(
             collectionRef,
@@ -42,13 +44,20 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
             where("uid", "==", uid),
             orderBy("createdAt", "desc")
           );
+        } else if (uid) {
+          q = await query(
+            collectionRef,
+            where("uid", "==", uid ), //verifica se o item está dentro do array
+            orderBy("createdAt", "desc") //ordenar 
+          );
+
         } else {
           q = await query(collectionRef, orderBy("createdAt", "desc"));
         }
 
         await onSnapshot(q, (querySnapshot) => {
           setDocuments(
-            querySnapshot.docs.map((doc) => ({
+            querySnapshot.docs.map((doc) => ({ //resgatando apenas os dados q eu quero do banco
               id: doc.id,  //resgatando o id do banco
               ...doc.data(),
             }))
@@ -56,11 +65,12 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
         });
       } catch (error) {
         console.log(error);
-        setError(error.message);
+        setError(error.message); //colocando msg no state de erro pra saber o que aconteceu, mostrar pro usuário
+
         setLoading(false);
       }
 
-        //aqui tinha um setLoading verificar se loading é aqui mesmo
+      //aqui tinha um setLoading verificar se loading é aqui mesmo
     }
 
     loadData();
@@ -72,5 +82,5 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
     return () => setCancelled(true);  // remonta quando precisar utilizar novamente
   }, []);
 
-  return { documents, loading, error };  //retorna como objeto para acessar os itens individualmente como eu quero
+  return { documents, loading, error };  //retorna como objeto para acessar os itens individualmente onde eu quero
 }; 

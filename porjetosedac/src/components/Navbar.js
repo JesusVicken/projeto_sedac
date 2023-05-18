@@ -16,7 +16,7 @@ const Navbar = () => {
 
     return <nav className={styles.navbar}>
         <NavLink to='/' className={styles.brand}>
-            Projeto <span>Sedac</span>
+            Sisca <span>nellas</span>
         </NavLink>
         
         <ul className={styles.links_list}>
