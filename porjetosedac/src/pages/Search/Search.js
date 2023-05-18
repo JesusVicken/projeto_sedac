@@ -20,11 +20,11 @@ const Search = () => {
     const { documents: posts } = useFetchDocuments("posts", search); //carregando os documentos baseado na busca
 
     return <div className={styles.search_container}>
-        <h2>Search</h2>
+        <h2>Pesquisa Relacionadas</h2>
         <div>
             {posts && posts.length === 0 && (
                 <div className={styles.noPost}>
-                    <p>Não foram encontrados posts a partir da sua busca!</p>
+                    <p>Não foram encontrados posts a partir da sua busca :/ </p>
                     <Link to="/" className="btn btn-dark">Voltar</Link>
                 </div>
             )}

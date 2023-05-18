@@ -32,7 +32,7 @@ const Home = () => {
                 <button className="btn btn-dark">Pesquisar</button>
             </form>
             <div className="post-list">
-                {loading && <p>Carregando...</p>}  {/*verificar se essa linha é necessário*/}
+                 {/* {loading && <p>Carregando...</p>}  verificar se essa linha é necessário */}
                 {posts && posts.map((post) => <PostDetail key={post.id} post={post} />)}   {/* mostrando o post na home */}
                 {posts && posts.length === 0 && (
                     <div className={styles.noposts}>
