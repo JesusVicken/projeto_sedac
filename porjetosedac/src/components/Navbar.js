@@ -1,7 +1,7 @@
 //navlink 
 import { NavLink } from "react-router-dom";
 //image
-
+import image from '../assets/logo.png'
 //hooks
 import { useAuthentication } from "../hooks/useAuthentication";
 //context
@@ -18,6 +18,10 @@ const Navbar = () => {
         <NavLink to='/' className={styles.brand}>
             Sisca <span>nellas</span>
         </NavLink>
+
+        <div>
+            <img src={image} alt="logo-camara" />
+        </div>
         
         <ul className={styles.links_list}>
             <li>
